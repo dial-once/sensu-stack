@@ -22,7 +22,7 @@
       "interval":120
     },
     "docker-container": {
-      "command":"check-docker-container.rb -u tcp://127.0.1.1:2375",
+      "command":"check-docker-container.rb -u http://127.0.1.1:2375",
       "standalone":true,
       "occurrences":2,
       "publish":true,
