@@ -22,14 +22,14 @@
       "interval":120
     },
     "docker-container": {
-      "command":"check-docker-container.rb",
+      "command":"check-docker-container.rb -u tcp://127.0.1.1:2375",
       "standalone":true,
       "occurrences":2,
       "publish":true,
       "interval":10
     },
     "docker-metrics" : {
-      "command":"metrics-docker-container.rb",
+      "command":"metrics-docker-container.rb -H tcp://127.0.1.1:2375",
       "standalone":true,
       "occurrences":2,
       "publish":true,
