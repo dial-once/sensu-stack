@@ -30,6 +30,7 @@ server:
   links:
     - rabbitmq
     - redis
+    - api
   restart: always
 uchiwa:
   image: 'anroots/uchiwa:latest'
@@ -41,4 +42,3 @@ uchiwa:
   ports:
     - '3000:80'
   restart: always
-
