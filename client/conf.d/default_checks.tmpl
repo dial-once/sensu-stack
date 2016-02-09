@@ -1,6 +1,6 @@
 {
   "checks":{
-    "metrics-mongodb": {
+    "metrics-rabbitmq": {
       "type": "metric",
       "command":"metrics-rabbitmq-queue.rb --host {{ .Env.TUTUM_NODE_FQDN }} --port {{ .Env.AMQP_MANAGEMENT_PORT }} --user admin --password {{ .Env.AMQP_MANAGEMENT_PASS }}",
       "subscribers": [
@@ -28,20 +28,6 @@
       "occurrences":2,
       "publish":true,
       "interval":120
-    },
-    "docker-container": {
-      "command":"check-docker-container.rb -u http://127.0.1.1:2375",
-      "standalone":true,
-      "occurrences":2,
-      "publish":true,
-      "interval":10
-    },
-    "docker-metrics" : {
-      "command":"metrics-docker-container.rb -H tcp://127.0.1.1:2375",
-      "standalone":true,
-      "occurrences":2,
-      "publish":true,
-      "interval":30
     }
   }
 }

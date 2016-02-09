@@ -2,11 +2,12 @@ FROM anroots/sensu-client
 
 RUN apt-get update && \
   apt-get install -y bc build-essential git && \
-  gem install sensu-plugins-memory-checks sensu-plugins-cpu-checks sensu-plugins-disk-checks sensu-plugins-docker sensu-plugins-rabbitmq bundler && \
   apt-get clean -y && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY conf.d /etc/sensu/conf.d/
+RUN gem install sensu-plugins-memory-checks sensu-plugins-cpu-checks sensu-plugins-disk-checks sensu-plugins-docker sensu-plugins-rabbitmq bundler
+
+COPY conf.d /etc/sensu/conf.d
 
 CMD dockerize \
   -template /etc/sensu/conf.d/rabbitmq.tmpl:/etc/sensu/conf.d/rabbitmq.json \
