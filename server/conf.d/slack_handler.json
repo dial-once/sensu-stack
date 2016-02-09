@@ -1,0 +1,14 @@
+{
+  "handlers": {
+    "slack": {
+      "type": "pipe",
+      "command": "handler-slack.rb",
+      "severities": ["warning", "critical", "unknown"]
+    }
+  },
+  "slack": {
+    "webhook_url": "https://hooks.slack.com/services/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",
+    "icon_url": "http://sensuapp.org/img/sensu_logo_large-c92d73db.png",
+    "icon_emoji": ":scream_cat:"
+  }
+}
