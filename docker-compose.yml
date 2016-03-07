@@ -8,7 +8,7 @@ api:
     - redis
   restart: always
 client:
-  build: 'client'
+  build: 'sensu-client'
   links:
     - rabbitmq
   restart: always
@@ -26,7 +26,7 @@ redis:
     - REDIS_PASS=WQuxUloeZomF
   restart: always
 server:
-  build: 'server'
+  build: 'sensu-server'
   links:
     - rabbitmq
     - redis
