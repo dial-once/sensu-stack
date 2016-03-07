@@ -13,7 +13,7 @@ sensu-api:
 
 sensu-client:
   build: 'sensu-client'
-  #deployment_strategy: every_node
+  deployment_strategy: every_node
   links:
     - sensu-rabbitmq
   restart: always
@@ -47,7 +47,7 @@ uchiwa:
     - HTTP_PASS=admin
     - HTTP_USER=admin
   links:
-    - sensu-api
+    - api
   ports:
     - '3000:80'
   restart: always
@@ -76,7 +76,7 @@ logspout:
   image: 'gliderlabs/logspout'
   entrypoint: '/bin/sh'
   command: '-c "/bin/logspout syslog://logstash:5000"'
-  #deployment_strategy: every_node
+  deployment_strategy: every_node
   volumes:
     - '/var/run/docker.sock:/tmp/docker.sock'
   links:
