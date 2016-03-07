@@ -1,13 +1,5 @@
 {
   "checks":{
-    "metrics-rabbitmq": {
-      "type": "metric",
-      "command":"metrics-rabbitmq-queue.rb --host {{ .Env.TUTUM_NODE_FQDN }} --port {{ .Env.AMQP_MANAGEMENT_PORT }} --user admin --password {{ .Env.AMQP_MANAGEMENT_PASS }}",
-      "subscribers": [
-        "amqp"
-      ],
-      "interval":10
-    },
     "memory-usage":{
      "command":"check-memory-percent.rb -w 70 -c 85",
      "standalone":true,
