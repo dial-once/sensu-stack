@@ -11,7 +11,6 @@ RUN gem install sensu-plugins-memory-checks sensu-plugins-cpu-checks sensu-plugi
 COPY conf.d /etc/sensu/conf.d
 
 CMD dockerize \
-  -template /etc/sensu/conf.d/rabbitmq.tmpl:/etc/sensu/conf.d/rabbitmq.json \
   -template /etc/sensu/conf.d/client.tmpl:/etc/sensu/conf.d/client.json \
   -template /etc/sensu/conf.d/default_checks.tmpl:/etc/sensu/conf.d/default_checks.json \
   /opt/sensu/bin/sensu-client -d /etc/sensu/conf.d
