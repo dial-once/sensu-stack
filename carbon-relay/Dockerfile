@@ -1,7 +1,7 @@
 FROM rounds/10m-graphite-carbon-relay
 MAINTAINER Jonathan Muller
 
-COPY relay-rules.conf.tmpl /etc/carbon/relay-rules.conf
+COPY relay-rules.conf.tmpl relay-rules.conf.tmpl
 
 CMD dockerize \
   -template relay-rules.conf.tmpl:/etc/carbon/relay-rules.conf \

@@ -1,7 +1,7 @@
 FROM rounds/10m-graphite-web
 MAINTAINER Jonathan Muller
 
-COPY local.settings.py.tmpl /etc/graphite/local_settings.py
+COPY local.settings.py.tmpl local.settings.py.tmpl
 
 CMD dockerize \
   -template local.settings.py.tmpl:/etc/graphite/local_settings.py \
