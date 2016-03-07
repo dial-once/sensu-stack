@@ -1,0 +1,83 @@
+
+## Sensu stack
+
+sensu-api:
+  image: 'anroots/sensu-api:latest'
+  environment:
+    - API_PASS=jrHVKNuM8Zw4
+    - API_USER=2RXlri2xmx5i
+  links:
+    - sensu-rabbitmq
+    - sensu-redis
+  restart: always
+
+sensu-client:
+  build: 'sensu-client'
+  deployment_strategy: every_node
+  links:
+    - sensu-rabbitmq
+  restart: always
+
+sensu-rabbitmq:
+  image: 'tutum/rabbitmq:latest'
+  environment:
+    - RABBITMQ_PASS=aEW5qDg3qPBh
+    - RABBITMQ_USER=NI4EvqdOy3RT
+  ports:
+    - '5672:5672'
+  restart: always
+
+sensu-redis:
+  image: 'tutum/redis:latest'
+  environment:
+    - REDIS_PASS=WQuxUloeZomF
+  restart: always
+
+sensu-server:
+  build: 'sensu-server'
+  links:
+    - sensu-rabbitmq
+    - sensu-redis
+    - sensu-api
+  restart: always
+
+uchiwa:
+  image: 'anroots/uchiwa:latest'
+  environment:
+    - HTTP_PASS=admin
+    - HTTP_USER=admin
+  links:
+    - api
+  ports:
+    - '3000:80'
+  restart: always
+
+## elasticsearch + logstash + logspout
+
+elasticsearch:
+  build: 'elasticsearch'
+  ports:
+    - '9200:9200'
+  volumes:
+    - ./elasticsearch/config:/data/config
+    - /data/logs
+    - /data/data
+    - /data/plugins
+
+logstash:
+  image: 'logstash'
+  command: 'logstash -e ''input { syslog { port => 5000 type => "docker" } } output { elasticsearch { hosts => "elasticsearch:9200" } }'''
+  ports:
+    - '5000:5000'
+  links:
+    - elasticsearch
+
+logspout:
+  image: 'gliderlabs/logspout'
+  entrypoint: '/bin/sh'
+  command: '-c "/bin/logspout syslog://logstash:5000"'
+  deployment_strategy: every_node
+  volumes:
+    - '/var/run/docker.sock:/tmp/docker.sock'
+  links:
+    - logstash
