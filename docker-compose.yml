@@ -81,3 +81,6 @@ logspout:
     - '/var/run/docker.sock:/tmp/docker.sock'
   links:
     - logstash
+carbon-cache:
+  image: 'dialonce/carbon-cache:latest'
+  restart: always
