@@ -12,7 +12,7 @@ sensu-api:
   restart: always
 
 sensu-client:
-  build: 'sensu-client'
+  image: 'dialonce/sensu-client:latest'
   deployment_strategy: every_node
   links:
     - sensu-rabbitmq
@@ -34,7 +34,7 @@ sensu-redis:
   restart: always
 
 sensu-server:
-  build: 'sensu-server'
+  image: 'dialonce/sensu-server:latest'
   links:
     - sensu-rabbitmq
     - sensu-redis
@@ -55,7 +55,7 @@ uchiwa:
 ## elasticsearch + logstash + logspout
 
 elasticsearch:
-  build: 'elasticsearch'
+  image: 'dialonce/elasticsearch:latest'
   ports:
     - '9200:9200'
   volumes:
