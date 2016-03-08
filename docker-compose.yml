@@ -50,7 +50,7 @@ sensu-server:
   restart: always
 
 uchiwa:
-  image: 'anroots/uchiwa:latest'
+  build: 'uchiwa'
   environment:
     - HTTP_PASS=
     - HTTP_USER=
