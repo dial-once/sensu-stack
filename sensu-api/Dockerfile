@@ -1,5 +1,7 @@
 FROM dialonce/sensu
 
+MAINTAINER Julien Kernec'h <jkernech@dial-once.com>
+
 ENV API_USER=WqNu4awAaNoP API_PASS=abcXvzSqoSw7
 
 COPY conf.d /etc/sensu/conf.d
