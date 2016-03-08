@@ -4,50 +4,58 @@
 sensu-api:
   image: 'anroots/sensu-api:latest'
   environment:
-    - API_PASS=jrHVKNuM8Zw4
-    - API_USER=2RXlri2xmx5i
+    - API_PASS=
+    - API_USER=
   links:
-    - sensu-rabbitmq
-    - sensu-redis
+    - rabbitmq
+    - redis
   restart: always
 
 sensu-client:
-  image: 'dialonce/sensu-client:latest'
+  build: 'sensu-client'
   deployment_strategy: every_node
   links:
-    - sensu-rabbitmq
+    - rabbitmq
   restart: always
 
-sensu-rabbitmq:
+rabbitmq:
   image: 'tutum/rabbitmq:latest'
   environment:
-    - RABBITMQ_PASS=aEW5qDg3qPBh
-    - RABBITMQ_USER=NI4EvqdOy3RT
+    - RABBITMQ_PASS=
+    - RABBITMQ_USER=
   ports:
     - '5672:5672'
   restart: always
 
-sensu-redis:
+redis:
   image: 'tutum/redis:latest'
   environment:
-    - REDIS_PASS=WQuxUloeZomF
+    - REDIS_PASS=
   restart: always
 
 sensu-server:
-  image: 'dialonce/sensu-server:latest'
+  build: 'sensu-server'
+  environment:
+    - SLACK_WEBHOOK_URL=
+    - SLACK_ICON_URL=http://sensuapp.org/img/sensu_logo_large-c92d73db.png
+    - 'SLACK_EMOJI=:screamcat:'
+    - MAILGUN_APIKEY=
+    - MAILGUN_DOMAIN=
+    - MAILGUN_FROM=
+    - MAILGUN_TO=
   links:
-    - sensu-rabbitmq
-    - sensu-redis
+    - rabbitmq
+    - redis
     - sensu-api
   restart: always
 
 uchiwa:
   image: 'anroots/uchiwa:latest'
   environment:
-    - HTTP_PASS=admin
-    - HTTP_USER=admin
+    - HTTP_PASS=
+    - HTTP_USER=
   links:
-    - api
+    - sensu-api
   ports:
     - '3000:80'
   restart: always
@@ -55,7 +63,7 @@ uchiwa:
 ## elasticsearch + logstash + logspout
 
 elasticsearch:
-  image: 'dialonce/elasticsearch:latest'
+  build: 'elasticsearch'
   ports:
     - '9200:9200'
   volumes:

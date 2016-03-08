@@ -1,0 +1,14 @@
+{
+  "handlers": {
+    "slack": {
+      "type": "pipe",
+      "command": "handler-slack.rb",
+      "severities": ["warning", "critical", "unknown"]
+    }
+  },
+  "slack": {
+    "webhook_url": "{{ .Env.SLACK_WEBHOOK_URL }}",
+    "icon_url": "{{ .Env.SLACK_ICON_URL }}",
+    "icon_emoji": "{{ .Env.SLACK_EMOJI }}"
+  }
+}

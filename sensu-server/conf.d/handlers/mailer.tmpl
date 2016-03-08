@@ -7,9 +7,9 @@
         }
       },
       "mailer-mailgun": {
-        "mail_from": "sensu@dialonce.io",
-        "mail_to": "support@dial-once.com",
-        "mg_apikey": "key-fa17ed60ecc3114d928d4eb2f8a35ad2",
-        "mg_domain": "sandboxe5b1f1c956cb4409a5a69d14185c1ce9.mailgun.org"
+        "mail_from": "{{ .Env.MAILGUN_FROM }}",
+        "mail_to": "{{ .Env.MAILGUN_TO }}",
+        "mg_apikey": "{{ .Env.MAILGUN_APIKEY }}",
+        "mg_domain": "{{ .Env.MAILGUN_DOMAIN }}"
       }
   }
