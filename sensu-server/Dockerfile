@@ -1,11 +1,6 @@
-FROM anroots/sensu-server
+FROM dialonce/sensu
 
-RUN apt-get update && \
-  apt-get install -y bc build-essential && \
-  /opt/sensu/embedded/bin/gem install sensu-plugins-slack sensu-plugins-mailer && \
-  apt-get clean -y && \
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+RUN gem install sensu-plugins-slack sensu-plugins-mailer
 
 COPY conf.d /etc/sensu/conf.d
 
@@ -14,4 +9,4 @@ CMD dockerize \
   -template /etc/sensu/conf.d/api.tmpl:/etc/sensu/conf.d/api.json \
   -template /etc/sensu/conf.d/handlers/slack.tmpl:/etc/sensu/conf.d/handlers/slack.json \
   -template /etc/sensu/conf.d/handlers/mailer.tmpl:/etc/sensu/conf.d/handlers/mailer.json \
-  /opt/sensu/bin/sensu-server -d /etc/sensu/conf.d
+  sensu-server -d /etc/sensu/conf.d

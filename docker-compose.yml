@@ -2,10 +2,10 @@
 ## Sensu stack
 
 sensu-api:
-  image: 'anroots/sensu-api:latest'
+  build: 'sensu-api'
   environment:
-    - API_PASS=jrHVKNuM8Zw4
-    - API_USER=2RXlri2xmx5i
+    - API_PASS=
+    - API_USER=
   links:
     - rabbitmq
     - redis
@@ -21,8 +21,8 @@ sensu-client:
 rabbitmq:
   image: 'tutum/rabbitmq:latest'
   environment:
-    - RABBITMQ_PASS=aEW5qDg3qPBh
-    - RABBITMQ_USER=NI4EvqdOy3RT
+    - RABBITMQ_PASS=
+    - RABBITMQ_USER=
   ports:
     - '5672:5672'
   restart: always
@@ -30,7 +30,7 @@ rabbitmq:
 redis:
   image: 'tutum/redis:latest'
   environment:
-    - REDIS_PASS=WQuxUloeZomF
+    - REDIS_PASS=
   restart: always
 
 sensu-server:
@@ -52,8 +52,8 @@ sensu-server:
 uchiwa:
   image: 'anroots/uchiwa:latest'
   environment:
-    - HTTP_PASS=admin
-    - HTTP_USER=admin
+    - HTTP_PASS=
+    - HTTP_USER=
   links:
     - sensu-api
   ports:
