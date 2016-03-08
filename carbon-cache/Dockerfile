@@ -1,16 +1,14 @@
 FROM alpine:latest
 MAINTAINER Jonathan Muller
 
-RUN apk --no-cache add \
-    python \
-    python-dev \
-    py-pip \
-    openssl \
-    build-base \
-  && wget https://github.com/jwilder/dockerize/releases/download/v0.2.0/dockerize-linux-amd64-v0.2.0.tar.gz \
-  && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.2.0.tar.gz \
-  && pip install https://github.com/graphite-project/ceres/tarball/master \
-  && pip install whisper carbon
+RUN apk add --no-cache python && \
+    apk add --no-cache --virtual build-dependencies build-base wget py-pip openssl ca-certificates python-dev \
+  && wget https://github.com/jwilder/dockerize/releases/download/v0.2.0/dockerize-linux-amd64-v0.2.0.tar.gz && \
+    tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.2.0.tar.gz && \
+    rm dockerize-linux-amd64-v0.2.0.tar.gz \
+  && pip install --upgrade pip \
+  && pip install --no-cache-dir whisper carbon \
+  && apk del build-dependencies
 
 COPY carbon.conf.tmpl carbon.conf.tmpl
 
