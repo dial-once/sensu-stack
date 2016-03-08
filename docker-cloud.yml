@@ -2,7 +2,7 @@
 ## Sensu stack
 
 sensu-api:
-  image: 'anroots/sensu-api:latest'
+  image: 'dialonce/sensu-api:latest'
   environment:
     - API_PASS=
     - API_USER=
@@ -12,7 +12,7 @@ sensu-api:
   restart: always
 
 sensu-client:
-  build: 'sensu-client'
+  image: 'dialonce/sensu-client:latest'
   deployment_strategy: every_node
   links:
     - rabbitmq
@@ -34,7 +34,7 @@ redis:
   restart: always
 
 sensu-server:
-  build: 'sensu-server'
+  image: 'dialonce/sensu-server:latest'
   environment:
     - SLACK_WEBHOOK_URL=
     - SLACK_ICON_URL=http://sensuapp.org/img/sensu_logo_large-c92d73db.png
@@ -50,7 +50,7 @@ sensu-server:
   restart: always
 
 uchiwa:
-  image: 'anroots/uchiwa:latest'
+  image: 'dialonce/uchiwa:latest'
   environment:
     - HTTP_PASS=
     - HTTP_USER=
