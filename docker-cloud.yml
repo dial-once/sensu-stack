@@ -47,6 +47,7 @@ sensu-server:
     - rabbitmq
     - redis
     - sensu-api
+    - carbon-relay
   restart: always
 
 uchiwa:
@@ -89,3 +90,25 @@ logspout:
     - '/var/run/docker.sock:/tmp/docker.sock'
   links:
     - logstash
+
+## carbon / graphite
+
+carbon-cache:
+  image: 'dialonce/carbon-cache:latest'
+  restart: always
+  volumes:
+    - /data/carbon:/opt/graphite/storage
+carbon-relay:
+  image: 'dialonce/carbon-relay:latest'
+  restart: always
+  links:
+    - carbon-cache
+  volumes:
+    - /data/carbon:/opt/graphite/storage
+graphite-web:
+  image: 'dialonce/graphite-web:latest'
+  restart: always
+  ports:
+    - '8000:8000'
+  volumes:
+    - /data/carbon:/opt/graphite/storage
