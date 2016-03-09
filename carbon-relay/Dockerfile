@@ -10,11 +10,10 @@ RUN apk add --no-cache python && \
   && pip install --no-cache-dir whisper carbon \
   && apk del build-dependencies
 
-COPY relay-rules.conf.tmpl relay-rules.conf.tmpl
-COPY carbon.conf.tmpl carbon.conf.tmpl
+COPY conf /etc/carbon/conf
 
 CMD dockerize \
-  -template relay-rules.conf.tmpl:/opt/graphite/conf/relay-rules.conf \
-  -template carbon.conf.tmpl:/opt/graphite/conf/carbon.conf \
+  -template /etc/carbon/conf/relay-rules.conf.tmpl:/opt/graphite/conf/relay-rules.conf \
+  -template /etc/carbon/conf/carbon.conf.tmpl:/opt/graphite/conf/carbon.conf \
   && cp /opt/graphite/conf/storage-schemas.conf.example /opt/graphite/conf/storage-schemas.conf \
   && /opt/graphite/bin/carbon-relay.py --nodaemon start

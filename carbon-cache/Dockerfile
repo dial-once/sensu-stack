@@ -10,10 +10,10 @@ RUN apk add --no-cache python && \
   && pip install --no-cache-dir whisper carbon \
   && apk del build-dependencies
 
-COPY carbon.conf.tmpl carbon.conf.tmpl
+COPY conf /etc/carbon/conf
 
 VOLUME /opt/graphite/storage
 
-CMD dockerize -template carbon.conf.tmpl:/opt/graphite/conf/carbon.conf \
+CMD dockerize -template /etc/carbon/conf/carbon.conf.tmpl:/opt/graphite/conf/carbon.conf \
   && cp /opt/graphite/conf/storage-schemas.conf.example /opt/graphite/conf/storage-schemas.conf \
   && /opt/graphite/bin/carbon-cache.py --nodaemon start
