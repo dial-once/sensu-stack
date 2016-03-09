@@ -22,5 +22,5 @@ CMD dockerize \
   && cp /opt/graphite/conf/graphite.wsgi.example /opt/graphite/webapp/graphite/graphite_wsgi.py \
   && cd /opt/graphite/webapp/graphite \
   && python manage.py migrate --run-syncdb \
-  && gunicorn -w 2 -b 0.0.0.0:8888 graphite_wsgi:application
+  && gunicorn -w 2 -b 0.0.0.0:8000 graphite_wsgi:application
   
