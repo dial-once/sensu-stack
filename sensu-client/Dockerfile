@@ -2,7 +2,13 @@ FROM dialonce/sensu
 
 MAINTAINER Julien Kernec'h <jkernech@dial-once.com>
 
-RUN gem install sensu-plugins-memory-checks sensu-plugins-cpu-checks sensu-plugins-disk-checks sensu-plugins-docker sensu-plugins-rabbitmq sensu-plugins-redis sensu-plugins-slack
+RUN gem install \
+  sensu-plugins-memory-checks \
+  sensu-plugins-cpu-checks \
+  sensu-plugins-disk-checks \
+  sensu-plugins-docker \
+  sensu-plugins-rabbitmq \
+  sensu-plugins-redis
 
 COPY conf.d /etc/sensu/conf.d
 
