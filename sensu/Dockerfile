@@ -6,7 +6,7 @@ MAINTAINER Julien Kernec'h <jkernech@dial-once.com>
 RUN apk update && apk upgrade
 
 # Install base packages and ruby gem dependencies
-RUN apk add --no-cache bash build-base ca-certificates wget libffi-dev
+RUN apk add --no-cache bash bc build-base ca-certificates wget libffi-dev
 
 # Install ruby and ruby-bundler
 RUN apk add --no-cache ruby-dev ruby-bundler
