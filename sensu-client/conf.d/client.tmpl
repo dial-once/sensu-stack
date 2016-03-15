@@ -5,5 +5,10 @@
     "subscriptions":[
       "all"{{if .Env.SUBSCRIPTIONS}}{{$subscriptions := split .Env.SUBSCRIPTIONS ","}}{{ range $subscription := $subscriptions }},"{{ $subscription }}"{{end}}{{end}}
     ]
+  },
+  "rabbitmq":{
+    "host":"{{ .Env.RABBITMQ_PORT_5672_TCP_ADDR }}",
+    "user":"{{ .Env.RABBITMQ_ENV_RABBITMQ_USER }}",
+    "password":"{{ .Env.RABBITMQ_ENV_RABBITMQ_PASS }}"
   }
 }
