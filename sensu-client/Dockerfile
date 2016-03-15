@@ -14,5 +14,5 @@ COPY conf.d /etc/sensu/conf.d
 
 CMD dockerize \
   -template /etc/sensu/conf.d/client.tmpl:/etc/sensu/conf.d/client.json \
-  -template /etc/sensu/conf.d/default_checks.tmpl:/etc/sensu/conf.d/default_checks.json \
+  -template /etc/sensu/conf.d/checks/rabbitmq.tmpl:/etc/sensu/conf.d/checks/rabbitmq.json \
   sensu-client -d /etc/sensu/conf.d
