@@ -1,0 +1,25 @@
+{
+  "checks":{
+    "rabbitmq-alive": {
+      "command":"check-rabbitmq-alive.rb --host {{ .Env.RABBITMQ_PORT_5672_TCP_ADDR }} --username {{ .Env.RABBITMQ_ENV_RABBITMQ_USER }} --password {{ .Env.RABBITMQ_ENV_RABBITMQ_PASS }}",
+      "standalone":true,
+      "occurrences":2,
+      "publish":true,
+      "interval":10
+    },
+    "rabbitmq-cluster-health": {
+      "command":"check-rabbitmq-cluster-health.rb --host {{ .Env.RABBITMQ_PORT_5672_TCP_ADDR }} --username {{ .Env.RABBITMQ_ENV_RABBITMQ_USER }} --password {{ .Env.RABBITMQ_ENV_RABBITMQ_PASS }}",
+      "standalone":true,
+      "occurrences":2,
+      "publish":true,
+      "interval":10
+    },
+    "rabbitmq-queue-drain-time": {
+      "command":"check-rabbitmq-queue-drain-time.rb --host {{ .Env.RABBITMQ_PORT_5672_TCP_ADDR }} --user {{ .Env.RABBITMQ_ENV_RABBITMQ_USER }} --password {{ .Env.RABBITMQ_ENV_RABBITMQ_PASS }} -w 180 -c 360",
+      "standalone":true,
+      "occurrences":2,
+      "publish":true,
+      "interval":10
+    }
+  }
+}
