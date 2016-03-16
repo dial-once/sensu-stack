@@ -32,9 +32,10 @@ ENV HTTP_USER=hiro HTTP_PASS=nakamura SENSU_NAME="Sensu" UCHIWA_HOST="0.0.0.0" U
 
 EXPOSE 80
 
-RUN wget https://github.com/jwilder/dockerize/releases/download/v0.0.4/dockerize-linux-amd64-v0.0.4.tar.gz && \
-	tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.0.4.tar.gz && \
-	mkdir /etc/uchiwa
+RUN wget https://github.com/jwilder/dockerize/releases/download/v0.0.4/dockerize-linux-amd64-v0.0.4.tar.gz \
+  && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.0.4.tar.gz \
+	&& rm dockerize-linux-amd64-v0.0.4.tar.gz \
+	&& mkdir /etc/uchiwa
 
 COPY config.tmpl /etc/uchiwa/
 
