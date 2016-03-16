@@ -1,4 +1,10 @@
 {
+  "api": {
+    "host": "{{ .Env.SENSU_API_PORT_4567_TCP_ADDR }}",
+    "port": {{ .Env.SENSU_API_PORT_4567_TCP_PORT }},
+    "user": "{{ .Env.SENSU_API_ENV_API_USER }}",
+    "password":"{{ .Env.SENSU_API_ENV_API_PASS }}"
+  },
   "rabbitmq":{
     "host":"{{ .Env.RABBITMQ_PORT_5672_TCP_ADDR }}",
     "user":"{{ .Env.RABBITMQ_ENV_RABBITMQ_USER }}",
@@ -13,7 +19,8 @@
       "type":"set",
       "handlers":[
         "stdout",
-        "slack"
+        "slack",
+        "mailer-mailgun"
       ]
     },
     "stdout":{
