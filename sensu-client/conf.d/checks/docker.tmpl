@@ -1,0 +1,11 @@
+{
+  "checks":{
+    "docker-container": {
+      "command":"check-docker-container.rb -h /var/run/docker.sock -w 3 -c 3",
+      "standalone":true,
+      "occurrences":2,
+      "publish":true,
+      "interval":10
+    }
+  }
+}

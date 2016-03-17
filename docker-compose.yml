@@ -16,7 +16,10 @@ sensu-client:
   #deployment_strategy: every_node
   links:
     - rabbitmq
+  privileged: true
   restart: always
+  volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
 
 rabbitmq:
   image: 'tutum/rabbitmq:latest'
