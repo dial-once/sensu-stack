@@ -1,4 +1,4 @@
-FROM elasticsearch:latest
+FROM elasticsearch:2.2.0
 
 # Install the required plugins
 RUN plugin install polyfractal/elasticsearch-inquisitor
