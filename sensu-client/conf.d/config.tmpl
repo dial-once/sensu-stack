@@ -3,7 +3,7 @@
     "name":"{{ if .Env.DOCKERCLOUD_NODE_HOSTNAME }}{{ .Env.DOCKERCLOUD_NODE_HOSTNAME }}{{ else }}{{ .Env.HOSTNAME }}{{ end }}",
     "address":"{{ if .Env.DOCKERCLOUD_IP_ADDRESS }}{{ .Env.DOCKERCLOUD_IP_ADDRESS }}{{ else }}{{ .Env.HOSTNAME }}{{ end }}",
     "subscriptions":[
-      "all"{{if .Env.SUBSCRIPTIONS}}{{$subscriptions := split .Env.SUBSCRIPTIONS ","}}{{ range $subscription := $subscriptions }},"{{ $subscription }}"{{end}}{{end}}
+      {{if .Env.SUBSCRIPTIONS}}{{$subscriptions := split .Env.SUBSCRIPTIONS ","}}{{ range $subscription := $subscriptions }},"{{ $subscription }}"{{end}}{{ else }}"all"{{end}}
     ]
   },
   "rabbitmq":{
