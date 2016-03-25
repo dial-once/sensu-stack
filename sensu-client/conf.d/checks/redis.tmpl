@@ -1,0 +1,18 @@
+{
+  "checks":{
+    "redis-alive": {
+      "command":"check-redis-ping.rb --host {{ .Env.REDIS_PORT_6379_TCP_ADDR }} --port {{ .Env.REDIS_PORT_6379_TCP_PORT }} --password {{ .Env.REDIS_ENV_REDIS_PASS }}",
+      "occurrences":2,
+      "publish":true,
+      "interval":10,
+      "subscribers": ["redis"]
+    },
+    "redis-memory": {
+      "command":"check-redis-memory-percentage.rb --host {{ .Env.REDIS_PORT_6379_TCP_ADDR }} --port {{ .Env.REDIS_PORT_6379_TCP_PORT }} --password {{ .Env.REDIS_ENV_REDIS_PASS }} -w 80 -c 90",
+      "occurrences":2,
+      "publish":true,
+      "interval":10,
+      "subscribers": ["redis"]
+    }
+  }
+}

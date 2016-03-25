@@ -22,4 +22,5 @@ CMD dockerize \
   -template /etc/sensu/conf.d/config.tmpl:/etc/sensu/conf.d/config.json \
   -template /etc/sensu/conf.d/checks/docker.tmpl:/etc/sensu/conf.d/checks/docker.json \
   -template /etc/sensu/conf.d/checks/rabbitmq.tmpl:/etc/sensu/conf.d/checks/rabbitmq.json \
+  -template /etc/sensu/conf.d/checks/redis.tmpl:/etc/sensu/conf.d/checks/redis.json \
   sensu-client -d /etc/sensu/conf.d
